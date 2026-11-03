@@ -1,0 +1,76 @@
+{
+  "snippets": [
+    {
+      "id": 1,
+      "language": "javascript",
+      "code": "function fibonacci(n) {\n    if (n <= 1) return n;\n    return fibonacci(n - 1) + fibonacci(n - 2);\n}",
+      "description": "Calculates the Nth Fibonacci number by calling itself again and again until it reaches the base case."
+    },
+    {
+      "id": 2,
+      "language": "javascript",
+      "code": "const quickSort = (arr) => {\n    if (arr.length <= 1) return arr;\n    const pivot = arr[arr.length - 1];\n    const left = arr.filter((x, i) => x <= pivot && i < arr.length - 1);\n    const right = arr.filter(x => x > pivot);\n    return [...quickSort(left), pivot, ...quickSort(right)];\n}",
+      "description": "Sorts an array by picking a pivot, splitting items into smaller and bigger groups, then sorting each group the same way."
+    },
+    {
+      "id": 3,
+      "language": "javascript",
+      "code": "class Node {\n    constructor(value) {\n        this.value = value;\n        this.next = null;\n    }\n}",
+      "description": "Creates a building block for a linked list. Each node holds a value and a pointer to the next node."
+    },
+    {
+      "id": 4,
+      "language": "javascript",
+      "code": "const debounce = (func, delay) => {\n    let timeoutId;\n    return (...args) => {\n        clearTimeout(timeoutId);\n        timeoutId = setTimeout(() => func(...args), delay);\n    };\n}",
+      "description": "Waits until the user stops doing something (like typing) for a set time before actually running the function."
+    },
+    {
+      "id": 5,
+      "language": "javascript",
+      "code": "async function fetchData(url) {\n    try {\n        const response = await fetch(url);\n        const data = await response.json();\n        return data;\n    } catch (error) {\n        console.error('Error:', error);\n    }\n}",
+      "description": "Fetches data from a URL, waits for the response, converts it to JSON, and handles any errors that happen."
+    },
+    {
+      "id": 6,
+      "language": "javascript",
+      "code": "const isPalindrome = (str) => {\n    const cleaned = str.toLowerCase().replace(/[^a-z0-9]/g, '');\n    return cleaned === cleaned.split('').reverse().join('');\n}",
+      "description": "Checks if a word or sentence reads the same forwards and backwards, ignoring spaces and punctuation."
+    },
+    {
+      "id": 7,
+      "language": "javascript",
+      "code": "function* infiniteSequence() {\n    let i = 0;\n    while (true) {\n        yield i++;\n    }\n}",
+      "description": "Creates an endless counter that gives you the next number each time you ask for it, starting from 0."
+    },
+    {
+      "id": 8,
+      "language": "javascript",
+      "code": "const mergeArrays = (arr1, arr2) => {\n    return [...new Set([...arr1, ...arr2])].sort((a, b) => a - b);\n}",
+      "description": "Combines two arrays into one, removes duplicates, and sorts the result from smallest to largest."
+    },
+    {
+      "id": 9,
+      "language": "javascript",
+      "code": "const binarySearch = (arr, target) => {\n    let left = 0, right = arr.length - 1;\n    while (left <= right) {\n        const mid = Math.floor((left + right) / 2);\n        if (arr[mid] === target) return mid;\n        else if (arr[mid] < target) left = mid + 1;\n        else right = mid - 1;\n    }\n    return -1;\n}",
+      "description": "Quickly finds an item in a sorted list by checking the middle and cutting the search area in half each time."
+    },
+    {
+      "id": 10,
+      "language": "javascript",
+      "code": "const throttle = (func, limit) => {\n    let inThrottle;\n    return function(...args) {\n        if (!inThrottle) {\n            func.apply(this, args);\n            inThrottle = true;\n            setTimeout(() => inThrottle = false, limit);\n        }\n    };\n}",
+      "description": "Limits how often a function can run. Even if called many times, it only runs once per time window."
+    },
+    {
+      "id": 11,
+      "language": "javascript",
+      "code": "const flattenArray = (arr) => {\n    return arr.reduce((flat, item) => {\n        return flat.concat(Array.isArray(item) ? flattenArray(item) : item);\n    }, []);\n}",
+      "description": "Takes a nested array (arrays inside arrays) and flattens everything into one single-level array."
+    },
+    {
+      "id": 12,
+      "language": "javascript",
+      "code": "class EventEmitter {\n    constructor() {\n        this.events = {};\n    }\n    on(event, listener) {\n        if (!this.events[event]) this.events[event] = [];\n        this.events[event].push(listener);\n    }\n    emit(event, ...args) {\n        if (this.events[event]) {\n            this.events[event].forEach(listener => listener(...args));\n        }\n    }\n}",
+      "description": "A simple event system where you can listen for named events and trigger them later with data."
+    }
+  ]
+}

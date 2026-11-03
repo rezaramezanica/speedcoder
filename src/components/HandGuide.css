@@ -1,0 +1,172 @@
+.hand-guide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+  width: 170px;
+  padding-top: 0.5rem;
+}
+
+.hands-container {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  align-items: flex-end;
+}
+
+.hand-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.hand-svg {
+  width: 75px;
+  height: 82px;
+}
+
+.hand-palm {
+  fill: #3a3a4a;
+  stroke: #555;
+  stroke-width: 1;
+  transition: fill 0.2s ease;
+}
+
+.typing-test.light .hand-palm {
+  fill: #d1d5db;
+  stroke: #9ca3af;
+}
+
+.hand-finger {
+  fill: #4a4a5e;
+  stroke: #666;
+  stroke-width: 1;
+  transition: fill 0.15s ease, stroke 0.15s ease, filter 0.15s ease;
+}
+
+.typing-test.light .hand-finger {
+  fill: #e5e7eb;
+  stroke: #9ca3af;
+}
+
+.hand-finger.active {
+  fill: #667eea;
+  stroke: #8b9cf7;
+  filter: drop-shadow(0 0 6px rgba(102, 126, 234, 0.6));
+}
+
+.typing-test.light .hand-finger.active {
+  fill: #667eea;
+  stroke: #4f6ad6;
+  filter: drop-shadow(0 0 6px rgba(102, 126, 234, 0.5));
+}
+
+.finger-dot {
+  fill: #666;
+  transition: fill 0.15s ease;
+}
+
+.typing-test.light .finger-dot {
+  fill: #9ca3af;
+}
+
+.finger-dot.active {
+  fill: #ffffff;
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.8));
+}
+
+.hand-palm.active {
+  fill: #2d2d5e;
+  stroke: #667eea;
+  stroke-width: 1.5;
+}
+
+.typing-test.light .hand-palm.active {
+  fill: #e0e4f7;
+  stroke: #667eea;
+}
+
+.palm-number {
+  font-size: 28px;
+  font-weight: 800;
+  fill: #667eea;
+  pointer-events: none;
+  filter: drop-shadow(0 0 4px rgba(102, 126, 234, 0.5));
+}
+
+.typing-test.light .palm-number {
+  fill: #4f6ad6;
+  filter: drop-shadow(0 0 4px rgba(79, 106, 214, 0.4));
+}
+
+.hand-label {
+  font-size: 0.6rem;
+  color: #6b7280;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.typing-test.dark .hand-label {
+  color: #9ca3af;
+}
+
+.finger-hint {
+  margin-top: 0.15rem;
+}
+
+.finger-hint-text {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #667eea;
+  background: rgba(102, 126, 234, 0.1);
+  padding: 0.1rem 0.5rem;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+/* Layout wrapper for side-by-side hands + content */
+.main-content-row {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.main-content-col {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .hand-guide {
+    width: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .main-content-row {
+    flex-direction: column;
+  }
+
+  .hand-svg {
+    width: 60px;
+    height: 66px;
+  }
+
+  .hands-container {
+    gap: 0.4rem;
+  }
+
+  .finger-hint-text {
+    font-size: 0.6rem;
+  }
+
+  .palm-number {
+    font-size: 22px;
+  }
+}

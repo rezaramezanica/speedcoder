@@ -1,0 +1,154 @@
+{
+  "snippets": [
+    {
+      "id": 1,
+      "language": "linux",
+      "code": "find /var/log -name \"*.log\" -mtime +7 -exec rm -f {} \\;",
+      "description": "Finds all .log files in /var/log that are older than 7 days and deletes them to free up disk space."
+    },
+    {
+      "id": 2,
+      "language": "linux",
+      "code": "ps aux | grep -v grep | grep nginx | awk '{print $2}' | xargs kill -9",
+      "description": "Finds all running nginx processes, gets their process IDs, and force-kills them all at once."
+    },
+    {
+      "id": 3,
+      "language": "linux",
+      "code": "df -h | awk '$5 > 80 {print $0}'",
+      "description": "Shows disk usage in human-readable format and only displays partitions that are more than 80% full."
+    },
+    {
+      "id": 4,
+      "language": "linux",
+      "code": "tail -f /var/log/syslog | grep -i error",
+      "description": "Watches the system log in real-time and only shows lines that contain the word 'error' (case insensitive)."
+    },
+    {
+      "id": 5,
+      "language": "linux",
+      "code": "netstat -tulpn | grep LISTEN",
+      "description": "Shows all open network ports that are currently listening for connections, along with which program is using each port."
+    },
+    {
+      "id": 6,
+      "language": "linux",
+      "code": "tar -czvf backup_$(date +%Y%m%d).tar.gz /etc /var/www",
+      "description": "Creates a compressed backup file with today's date in the name, containing the /etc config files and /var/www web files."
+    },
+    {
+      "id": 7,
+      "language": "linux",
+      "code": "ssh -i ~/.ssh/id_rsa -L 8080:localhost:80 user@remote-server",
+      "description": "Connects to a remote server with an SSH key and creates a tunnel so you can access the server's port 80 through your local port 8080."
+    },
+    {
+      "id": 8,
+      "language": "linux",
+      "code": "rsync -avz --progress /home/user/data/ user@backup-server:/backup/",
+      "description": "Copies files to a remote backup server, showing progress. Only transfers files that have changed, saving time and bandwidth."
+    },
+    {
+      "id": 9,
+      "language": "linux",
+      "code": "iptables -A INPUT -p tcp --dport 22 -s 192.168.1.0/24 -j ACCEPT",
+      "description": "Adds a firewall rule that allows SSH connections (port 22) only from devices on the local network (192.168.1.x)."
+    },
+    {
+      "id": 10,
+      "language": "linux",
+      "code": "systemctl status nginx && journalctl -u nginx --since \"1 hour ago\"",
+      "description": "Checks if nginx is running, and if so, shows its log entries from the last hour to help with troubleshooting."
+    },
+    {
+      "id": 11,
+      "language": "linux",
+      "code": "du -sh /var/* | sort -rh | head -10",
+      "description": "Shows the size of each folder inside /var, sorted from biggest to smallest, displaying only the top 10 space eaters."
+    },
+    {
+      "id": 12,
+      "language": "linux",
+      "code": "chmod -R 755 /var/www/html && chown -R www-data:www-data /var/www/html",
+      "description": "Sets file permissions to 755 and changes ownership to the web server user for all files in the web directory."
+    },
+    {
+      "id": 13,
+      "language": "linux",
+      "code": "curl -s -o /dev/null -w \"%{http_code}\" https://example.com/health",
+      "description": "Silently checks a website's health endpoint and prints just the HTTP status code (like 200 for OK or 500 for error)."
+    },
+    {
+      "id": 14,
+      "language": "linux",
+      "code": "grep -rn \"OutOfMemory\" /var/log/ --include=\"*.log\" | tail -20",
+      "description": "Searches all log files for 'OutOfMemory' errors, showing file names and line numbers, and displays the last 20 matches."
+    },
+    {
+      "id": 15,
+      "language": "linux",
+      "code": "top -bn1 | head -20 && free -m && uptime",
+      "description": "Takes a quick snapshot of system health: top processes, memory usage in megabytes, and how long the server has been running."
+    },
+    {
+      "id": 16,
+      "language": "linux",
+      "code": "docker ps -a --format \"{{.Names}} {{.Status}}\" | grep -v Up",
+      "description": "Lists all Docker containers and filters to show only the ones that are NOT running, helping you find crashed or stopped containers."
+    },
+    {
+      "id": 17,
+      "language": "linux",
+      "code": "lsof -i :8080 | awk 'NR>1 {print $2}' | xargs kill -9",
+      "description": "Finds whatever process is using port 8080, gets its process ID, and force-kills it to free up the port."
+    },
+    {
+      "id": 18,
+      "language": "linux",
+      "code": "scp -r /local/path user@remote:/remote/path",
+      "description": "Copies an entire folder from your local machine to a remote server over SSH, keeping all files and subfolders."
+    },
+    {
+      "id": 19,
+      "language": "linux",
+      "code": "crontab -l && echo \"0 2 * * * /usr/local/bin/backup.sh\" | crontab -",
+      "description": "Shows current scheduled tasks and adds a new one that runs a backup script every night at 2:00 AM."
+    },
+    {
+      "id": 20,
+      "language": "linux",
+      "code": "sed -i 's/listen 80/listen 443 ssl/g' /etc/nginx/sites-available/default",
+      "description": "Edits the nginx config file to change all instances of 'listen 80' to 'listen 443 ssl', switching from HTTP to HTTPS."
+    },
+    {
+      "id": 21,
+      "language": "linux",
+      "code": "ss -tulnp | grep -E ':(80|443|8080|3306)'",
+      "description": "Shows which programs are listening on common web and database ports (80, 443, 8080, 3306)."
+    },
+    {
+      "id": 22,
+      "language": "linux",
+      "code": "journalctl --disk-usage && journalctl --vacuum-size=500M",
+      "description": "Shows how much disk space system logs are using, then cleans them up to keep only the latest 500MB."
+    },
+    {
+      "id": 23,
+      "language": "linux",
+      "code": "tcpdump -i eth0 -nn port 80 -c 100 -w capture.pcap",
+      "description": "Captures 100 network packets on port 80 from the eth0 interface and saves them to a file for analysis."
+    },
+    {
+      "id": 24,
+      "language": "linux",
+      "code": "while ! nc -z localhost 5432; do sleep 1; echo \"Waiting for DB...\"; done",
+      "description": "Keeps checking if the database (port 5432) is ready, waiting 1 second between tries until it comes online."
+    },
+    {
+      "id": 25,
+      "language": "linux",
+      "code": "cat /proc/meminfo | grep -E 'MemTotal|MemFree|MemAvailable'",
+      "description": "Reads the system memory info and shows the total RAM, free RAM, and available RAM on the server."
+    }
+  ]
+}

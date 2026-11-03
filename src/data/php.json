@@ -1,0 +1,94 @@
+{
+  "snippets": [
+    {
+      "id": 1,
+      "language": "php",
+      "code": "<?php\nfunction fibonacci($n) {\n    if ($n <= 1) return $n;\n    return fibonacci($n - 1) + fibonacci($n - 2);\n}",
+      "description": "Calculates the Nth Fibonacci number by calling itself again and again until it reaches the base case."
+    },
+    {
+      "id": 2,
+      "language": "php",
+      "code": "<?php\nfunction quickSort($arr) {\n    if (count($arr) <= 1) return $arr;\n    $pivot = $arr[count($arr) - 1];\n    $left = array_filter($arr, fn($x, $i) => $x <= $pivot && $i < count($arr) - 1, ARRAY_FILTER_USE_BOTH);\n    $right = array_filter($arr, fn($x) => $x > $pivot);\n    return array_merge(quickSort($left), [$pivot], quickSort($right));\n}",
+      "description": "Sorts an array by picking a pivot, splitting items into smaller and bigger groups, then sorting each group the same way."
+    },
+    {
+      "id": 3,
+      "language": "php",
+      "code": "<?php\nclass Node {\n    public $value;\n    public $next;\n\n    public function __construct($value) {\n        $this->value = $value;\n        $this->next = null;\n    }\n}",
+      "description": "Creates a building block for a linked list. Each node holds a value and a pointer to the next node."
+    },
+    {
+      "id": 4,
+      "language": "php",
+      "code": "<?php\nfunction binarySearch($arr, $target) {\n    $left = 0;\n    $right = count($arr) - 1;\n    while ($left <= $right) {\n        $mid = intdiv($left + $right, 2);\n        if ($arr[$mid] === $target) return $mid;\n        elseif ($arr[$mid] < $target) $left = $mid + 1;\n        else $right = $mid - 1;\n    }\n    return -1;\n}",
+      "description": "Quickly finds an item in a sorted array by checking the middle and cutting the search area in half each time."
+    },
+    {
+      "id": 5,
+      "language": "php",
+      "code": "<?php\nfunction fetchData($url) {\n    $ch = curl_init($url);\n    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);\n    $response = curl_exec($ch);\n    curl_close($ch);\n    return json_decode($response, true);\n}",
+      "description": "Uses cURL to fetch data from a URL, get the response as a string, and convert the JSON into a PHP array."
+    },
+    {
+      "id": 6,
+      "language": "php",
+      "code": "<?php\nfunction isPalindrome($str) {\n    $cleaned = strtolower(preg_replace('/[^a-z0-9]/i', '', $str));\n    return $cleaned === strrev($cleaned);\n}",
+      "description": "Checks if a word or sentence reads the same forwards and backwards, ignoring spaces and punctuation."
+    },
+    {
+      "id": 7,
+      "language": "php",
+      "code": "<?php\nfunction fibonacciGenerator() {\n    $a = 0;\n    $b = 1;\n    while (true) {\n        yield $a;\n        [$a, $b] = [$b, $a + $b];\n    }\n}",
+      "description": "Creates an endless Fibonacci sequence using a generator, giving you the next number each time without using extra memory."
+    },
+    {
+      "id": 8,
+      "language": "php",
+      "code": "<?php\nclass Database {\n    private static $instance = null;\n    private $connection;\n\n    private function __construct() {\n        $this->connection = new PDO('mysql:host=localhost;dbname=test', 'user', 'pass');\n    }\n\n    public static function getInstance() {\n        if (self::$instance === null) {\n            self::$instance = new self();\n        }\n        return self::$instance;\n    }\n}",
+      "description": "A singleton database class that makes sure only one database connection exists in the whole app, reusing it everywhere."
+    },
+    {
+      "id": 9,
+      "language": "php",
+      "code": "<?php\nclass TreeNode {\n    public $val;\n    public $left;\n    public $right;\n\n    public function __construct($val = 0, $left = null, $right = null) {\n        $this->val = $val;\n        $this->left = $left;\n        $this->right = $right;\n    }\n}",
+      "description": "Creates a binary tree node that holds a value and can point to a left child and a right child."
+    },
+    {
+      "id": 10,
+      "language": "php",
+      "code": "<?php\nfunction mergeArrays(...$arrays) {\n    $merged = array_merge(...$arrays);\n    return array_unique($merged);\n}",
+      "description": "Takes any number of arrays, combines them all into one, and removes any duplicate values."
+    },
+    {
+      "id": 11,
+      "language": "php",
+      "code": "<?php\ninterface PaymentInterface {\n    public function processPayment(float $amount): bool;\n}\n\nclass StripePayment implements PaymentInterface {\n    public function processPayment(float $amount): bool {\n        return true;\n    }\n}",
+      "description": "Defines a payment interface and a Stripe implementation, so you can swap payment providers without changing other code."
+    },
+    {
+      "id": 12,
+      "language": "php",
+      "code": "<?php\ntrait Timestamp {\n    public $created_at;\n    public $updated_at;\n\n    public function updateTimestamps() {\n        $this->updated_at = date('Y-m-d H:i:s');\n    }\n}",
+      "description": "A reusable trait that adds created/updated timestamp fields and an update method to any class that uses it."
+    },
+    {
+      "id": 13,
+      "language": "php",
+      "code": "<?php\nfunction memoize(callable $func) {\n    return function(...$args) use ($func) {\n        static $cache = [];\n        $key = serialize($args);\n        if (!isset($cache[$key])) {\n            $cache[$key] = $func(...$args);\n        }\n        return $cache[$key];\n    };\n}",
+      "description": "Wraps any function to cache its results. If called with the same arguments again, it returns the saved result instead of recalculating."
+    },
+    {
+      "id": 14,
+      "language": "php",
+      "code": "<?php\n$data = ['name' => 'John', 'age' => 30];\n\n$filtered = array_filter($data, fn($value) => $value > 20);\n$mapped = array_map(fn($x) => $x * 2, [1, 2, 3, 4, 5]);\n$reduced = array_reduce([1, 2, 3, 4], fn($carry, $item) => $carry + $item, 0);",
+      "description": "Shows three common array operations: filtering values by condition, transforming each item, and combining all items into one result."
+    },
+    {
+      "id": 15,
+      "language": "php",
+      "code": "<?php\nenum Status: string {\n    case PENDING = 'pending';\n    case APPROVED = 'approved';\n    case REJECTED = 'rejected';\n\n    public function label(): string {\n        return match($this) {\n            self::PENDING => 'Pending Review',\n            self::APPROVED => 'Approved',\n            self::REJECTED => 'Rejected',\n        };\n    }\n}",
+      "description": "A PHP enum for status values with a method that returns a user-friendly label for each status."
+    }
+  ]
+}

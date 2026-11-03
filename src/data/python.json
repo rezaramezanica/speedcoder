@@ -1,0 +1,94 @@
+{
+  "snippets": [
+    {
+      "id": 1,
+      "language": "python",
+      "code": "def fibonacci(n):\n    if n <= 1:\n        return n\n    return fibonacci(n - 1) + fibonacci(n - 2)",
+      "description": "Calculates the Nth Fibonacci number by calling itself again and again until it reaches the base case."
+    },
+    {
+      "id": 2,
+      "language": "python",
+      "code": "def quick_sort(arr):\n    if len(arr) <= 1:\n        return arr\n    pivot = arr[-1]\n    left = [x for x in arr[:-1] if x <= pivot]\n    right = [x for x in arr[:-1] if x > pivot]\n    return quick_sort(left) + [pivot] + quick_sort(right)",
+      "description": "Sorts a list by picking a pivot, splitting items into smaller and bigger groups, then sorting each group the same way."
+    },
+    {
+      "id": 3,
+      "language": "python",
+      "code": "class Node:\n    def __init__(self, value):\n        self.value = value\n        self.next = None",
+      "description": "Creates a building block for a linked list. Each node holds a value and a pointer to the next node."
+    },
+    {
+      "id": 4,
+      "language": "python",
+      "code": "def binary_search(arr, target):\n    left, right = 0, len(arr) - 1\n    while left <= right:\n        mid = (left + right) // 2\n        if arr[mid] == target:\n            return mid\n        elif arr[mid] < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n    return -1",
+      "description": "Quickly finds an item in a sorted list by checking the middle and cutting the search area in half each time."
+    },
+    {
+      "id": 5,
+      "language": "python",
+      "code": "async def fetch_data(url):\n    async with aiohttp.ClientSession() as session:\n        async with session.get(url) as response:\n            return await response.json()",
+      "description": "Fetches data from a URL without blocking your program, using async to handle the waiting efficiently."
+    },
+    {
+      "id": 6,
+      "language": "python",
+      "code": "def is_palindrome(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]",
+      "description": "Checks if a word or sentence reads the same forwards and backwards, ignoring spaces and punctuation."
+    },
+    {
+      "id": 7,
+      "language": "python",
+      "code": "def generator_fibonacci():\n    a, b = 0, 1\n    while True:\n        yield a\n        a, b = b, a + b",
+      "description": "Creates an endless Fibonacci sequence that gives you the next number each time you ask, without storing them all in memory."
+    },
+    {
+      "id": 8,
+      "language": "python",
+      "code": "from functools import lru_cache\n\n@lru_cache(maxsize=None)\ndef fibonacci_cached(n):\n    if n <= 1:\n        return n\n    return fibonacci_cached(n - 1) + fibonacci_cached(n - 2)",
+      "description": "Calculates Fibonacci numbers but remembers previous results so it doesn't repeat the same work twice."
+    },
+    {
+      "id": 9,
+      "language": "python",
+      "code": "class TreeNode:\n    def __init__(self, val=0, left=None, right=None):\n        self.val = val\n        self.left = left\n        self.right = right\n\n    def inorder_traversal(self):\n        if self.left:\n            yield from self.left.inorder_traversal()\n        yield self.val\n        if self.right:\n            yield from self.right.inorder_traversal()",
+      "description": "A binary tree node that can walk through all values in sorted order: left side first, then itself, then right side."
+    },
+    {
+      "id": 10,
+      "language": "python",
+      "code": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n    mid = len(arr) // 2\n    left = merge_sort(arr[:mid])\n    right = merge_sort(arr[mid:])\n    return merge(left, right)\n\ndef merge(left, right):\n    result = []\n    i = j = 0\n    while i < len(left) and j < len(right):\n        if left[i] <= right[j]:\n            result.append(left[i])\n            i += 1\n        else:\n            result.append(right[j])\n            j += 1\n    result.extend(left[i:])\n    result.extend(right[j:])\n    return result",
+      "description": "Sorts a list by splitting it in half repeatedly, sorting each half, then merging the sorted halves back together."
+    },
+    {
+      "id": 11,
+      "language": "python",
+      "code": "from dataclasses import dataclass\nfrom typing import List\n\n@dataclass\nclass Person:\n    name: str\n    age: int\n    hobbies: List[str]\n\n    def introduce(self):\n        return f\"Hi, I'm {self.name}, {self.age} years old\"",
+      "description": "Creates a Person class with automatic setup. Dataclass saves you from writing the boring __init__ code yourself."
+    },
+    {
+      "id": 12,
+      "language": "python",
+      "code": "def decorator_timer(func):\n    def wrapper(*args, **kwargs):\n        start = time.time()\n        result = func(*args, **kwargs)\n        end = time.time()\n        print(f\"{func.__name__} took {end - start:.4f}s\")\n        return result\n    return wrapper",
+      "description": "A decorator that wraps any function to measure and print how long it takes to run."
+    },
+    {
+      "id": 13,
+      "language": "python",
+      "code": "class ContextManager:\n    def __enter__(self):\n        print(\"Entering context\")\n        return self\n\n    def __exit__(self, exc_type, exc_val, exc_tb):\n        print(\"Exiting context\")\n        return False",
+      "description": "A context manager for use with 'with' statements. It runs setup code when entering and cleanup code when leaving."
+    },
+    {
+      "id": 14,
+      "language": "python",
+      "code": "def flatten_list(nested_list):\n    result = []\n    for item in nested_list:\n        if isinstance(item, list):\n            result.extend(flatten_list(item))\n        else:\n            result.append(item)\n    return result",
+      "description": "Takes a nested list (lists inside lists) and flattens everything into one single-level list."
+    },
+    {
+      "id": 15,
+      "language": "python",
+      "code": "from collections import Counter\n\ndef most_common_elements(items, n=3):\n    counter = Counter(items)\n    return counter.most_common(n)",
+      "description": "Counts how many times each item appears in a list and returns the top N most frequent ones."
+    }
+  ]
+}

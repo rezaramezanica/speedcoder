@@ -1,0 +1,94 @@
+{
+  "snippets": [
+    {
+      "id": 1,
+      "language": "cpp",
+      "code": "#include <print>\n#include <vector>\n\nint main() {\n    std::vector<int> numbers = {1, 2, 3, 4, 5};\n    std::println(\"Numbers: {}\", numbers);\n    return 0;\n}",
+      "description": "A simple C++ program that creates a list of numbers and prints them using the modern std::println function."
+    },
+    {
+      "id": 2,
+      "language": "cpp",
+      "code": "#include <ranges>\n#include <vector>\n#include <algorithm>\n\nauto filterEven(const std::vector<int>& vec) {\n    return vec | std::views::filter([](int n) { return n % 2 == 0; })\n               | std::views::transform([](int n) { return n * 2; });\n}",
+      "description": "Uses C++ ranges to filter only even numbers from a list and double each one, like a pipeline of operations."
+    },
+    {
+      "id": 3,
+      "language": "cpp",
+      "code": "#include <concepts>\n\ntemplate<typename T>\nconcept Numeric = std::integral<T> || std::floating_point<T>;\n\ntemplate<Numeric T>\nT add(T a, T b) {\n    return a + b;\n}",
+      "description": "Defines a concept that only allows number types, then uses it to make an add function that only works with numbers."
+    },
+    {
+      "id": 4,
+      "language": "cpp",
+      "code": "#include <expected>\n#include <string>\n\nstd::expected<int, std::string> divide(int a, int b) {\n    if (b == 0) {\n        return std::unexpected(\"Division by zero\");\n    }\n    return a / b;\n}",
+      "description": "A safe divide function that returns either the result or an error message instead of crashing on division by zero."
+    },
+    {
+      "id": 5,
+      "language": "cpp",
+      "code": "#include <optional>\n#include <string>\n\nstd::optional<std::string> findUser(int id) {\n    if (id > 0 && id < 100) {\n        return \"User\" + std::to_string(id);\n    }\n    return std::nullopt;\n}",
+      "description": "Looks up a user by ID and returns the user if found, or 'nothing' if the ID is invalid, avoiding null pointer issues."
+    },
+    {
+      "id": 6,
+      "language": "cpp",
+      "code": "#include <span>\n#include <numeric>\n\nint sum(std::span<const int> values) {\n    return std::accumulate(values.begin(), values.end(), 0);\n}",
+      "description": "Adds up all numbers in a collection using span, which works with arrays, vectors, or any contiguous memory."
+    },
+    {
+      "id": 7,
+      "language": "cpp",
+      "code": "struct Point {\n    int x, y;\n    \n    auto operator<=>(const Point&) const = default;\n    \n    auto magnitude(this const Point& self) {\n        return std::sqrt(self.x * self.x + self.y * self.y);\n    }\n};",
+      "description": "A 2D point with automatic comparison operators and a method that calculates its distance from the origin."
+    },
+    {
+      "id": 8,
+      "language": "cpp",
+      "code": "#include <coroutine>\n#include <optional>\n\ntemplate<typename T>\nstruct Generator {\n    struct promise_type;\n    using handle_type = std::coroutine_handle<promise_type>;\n    \n    struct promise_type {\n        T value_;\n        auto get_return_object() { return Generator{handle_type::from_promise(*this)}; }\n        auto initial_suspend() { return std::suspend_always{}; }\n        auto final_suspend() noexcept { return std::suspend_always{}; }\n        void return_void() {}\n        auto yield_value(T value) {\n            value_ = value;\n            return std::suspend_always{};\n        }\n    };\n};",
+      "description": "A coroutine-based generator that can produce values one at a time, pausing and resuming between each one."
+    },
+    {
+      "id": 9,
+      "language": "cpp",
+      "code": "#include <variant>\n#include <string>\n\nstd::variant<int, double, std::string> processValue(int type) {\n    switch(type) {\n        case 0: return 42;\n        case 1: return 3.14;\n        default: return std::string(\"text\");\n    }\n}",
+      "description": "Returns different types of values (int, double, or string) from one function using variant as a type-safe union."
+    },
+    {
+      "id": 10,
+      "language": "cpp",
+      "code": "#include <ranges>\n#include <algorithm>\n\nauto fibonacci(int n) {\n    return std::views::iota(0, n)\n         | std::views::transform([](int i) {\n               int a = 0, b = 1;\n               for(int j = 0; j < i; ++j) {\n                   int temp = a + b;\n                   a = b;\n                   b = temp;\n               }\n               return a;\n           });\n}",
+      "description": "Generates the first N Fibonacci numbers using C++ ranges, creating a lazy sequence that computes values on demand."
+    },
+    {
+      "id": 11,
+      "language": "cpp",
+      "code": "#include <memory>\n\ntemplate<typename T>\nclass SmartBuffer {\n    std::unique_ptr<T[]> data_;\n    size_t size_;\n    \npublic:\n    SmartBuffer(size_t size) : data_(std::make_unique<T[]>(size)), size_(size) {}\n    \n    T& operator[](size_t index) { return data_[index]; }\n    const T& operator[](size_t index) const { return data_[index]; }\n    size_t size() const { return size_; }\n};",
+      "description": "A memory-safe buffer that automatically cleans up when destroyed. Uses smart pointers so you never forget to free memory."
+    },
+    {
+      "id": 12,
+      "language": "cpp",
+      "code": "#include <string_view>\n#include <algorithm>\n\nconstexpr bool isPalindrome(std::string_view str) {\n    return std::ranges::equal(str, str | std::views::reverse);\n}",
+      "description": "Checks if a string is a palindrome at compile time, comparing it with its reverse using ranges."
+    },
+    {
+      "id": 13,
+      "language": "cpp",
+      "code": "#include <vector>\n#include <algorithm>\n\ntemplate<typename T>\nconcept Sortable = requires(T a, T b) {\n    { a < b } -> std::convertible_to<bool>;\n};\n\ntemplate<Sortable T>\nvoid quickSort(std::vector<T>& arr, int low, int high) {\n    if (low < high) {\n        T pivot = arr[high];\n        int i = low - 1;\n        for (int j = low; j < high; ++j) {\n            if (arr[j] < pivot) {\n                std::swap(arr[++i], arr[j]);\n            }\n        }\n        std::swap(arr[++i], arr[high]);\n        quickSort(arr, low, i - 1);\n        quickSort(arr, i + 1, high);\n    }\n}",
+      "description": "A quicksort that only works with types that can be compared. Uses concepts to enforce this rule at compile time."
+    },
+    {
+      "id": 14,
+      "language": "cpp",
+      "code": "#include <ranges>\n#include <vector>\n\nauto chunkVector(const std::vector<int>& vec, size_t chunkSize) {\n    return vec | std::views::chunk(chunkSize)\n               | std::views::transform([](auto chunk) {\n                     return std::vector(chunk.begin(), chunk.end());\n                 });\n}",
+      "description": "Splits a vector into smaller chunks of a given size, like breaking a long list into pages."
+    },
+    {
+      "id": 15,
+      "language": "cpp",
+      "code": "#include <atomic>\n#include <thread>\n\nclass SpinLock {\n    std::atomic_flag flag = ATOMIC_FLAG_INIT;\n    \npublic:\n    void lock() {\n        while (flag.test_and_set(std::memory_order_acquire)) {\n            std::this_thread::yield();\n        }\n    }\n    \n    void unlock() {\n        flag.clear(std::memory_order_release);\n    }\n};",
+      "description": "A lightweight lock for multithreading that keeps checking until it can acquire access, useful for very short critical sections."
+    }
+  ]
+}
